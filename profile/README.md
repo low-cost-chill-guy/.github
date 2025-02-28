@@ -29,6 +29,22 @@
 #### 1. 개발계
 ![스크린샷 2025-02-28 145254](https://github.com/user-attachments/assets/1d439cfb-4b2d-486e-ac13-f46454df5140)  
 
+Jenkins가 Git에서 변경 사항을 감지하면 CI/CD 파이프라인을 실행  
+이 과정에서 웹 애플리케이션 컨테이너 이미지를 빌드하고,  
+완성된 이미지는 AWS ECR에 업로드
+
+다음으로, Jenkins가 ArgoCD의 GitOps 레포지토리에 있는 `Deployment.yaml` 파일을 수정하여  
+새로운 이미지 태그를 업데이트
+
+ArgoCD는 이 변경 사항을 감지하고,  
+ECR에서 최신 이미지를 가져와 AWS EKS에 자동 배포
+
+**Slack CI/CD 알림 연동**
+- Jenkins 빌드 성공/실패
+- ArgoCD 배포 완료 여부
+
+**개발자는 코드만 푸시하면 안정적으로 최신 서비스가 배포될 수 있도록 완전 자동화된 CI/CD 파이프라인 구축**
+
 개발계 인프라 전체 테라폼으로 구축
 
 #### 2. 미디어계
